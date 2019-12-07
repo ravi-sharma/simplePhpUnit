@@ -8,6 +8,7 @@
 class UserHierarchy
 {
     private $roles;
+    private $users;
 
     /**
      * @author Ravi Sharma <me@rvish.com>
@@ -18,6 +19,11 @@ class UserHierarchy
     public function setRoles($roles)
     {
         $this->roles = $this->getJson($roles);
+    }
+
+    public function setUsers($users)
+    {
+        $this->users = $this->getJson($users);
     }
 
     /**
@@ -33,17 +39,37 @@ class UserHierarchy
 
         if ($selectedRole > 0)
         {
-            foreach ($this->roles as $role)
+            foreach ($this->users as $user)
             {
-                if ($role->Role > $selectedRole)
+                if ($user->Role > $selectedRole)
                 {
-                    $result[] = $role;
+                    $result[] = $user;
                 }
             }
         }
 
         return $this->encode($result);
     }
+
+    /**
+     * @author Ravi Sharma <me@rvish.com>
+     *
+     * Method getSubOrdinatesByRoles
+     * @return array
+     */
+    public function getSubOrdinatesByRoles()
+    {
+        $result = [];
+
+        foreach ($this->roles as $role)
+        {
+            $result[$role->Id] = $this->getSubOrdinates($role->Id);
+        }
+
+        return $result;
+    }
+
+
 
     /**
      * @author Ravi Sharma <me@rvish.com>

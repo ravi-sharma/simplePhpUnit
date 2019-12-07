@@ -24,12 +24,12 @@ class UserHierarchyTest extends TestCase
     {
         parent::__construct($name, $data, $dataName);
 
-        require static::TEST_FILE;
+        require_once static::TEST_FILE;
 
         $this->userHierarchy = new UserHierarchy();
 
         $this->userHierarchy->setRoles(static::JSON_ROLES);
-        $this->userHierarchy->setRoles(static::JSON_USERS);
+        $this->userHierarchy->setUsers(static::JSON_USERS);
     }
 
     /**
@@ -50,6 +50,26 @@ class UserHierarchyTest extends TestCase
 
         // asserting unhappy case with role 5
         $this->assertNotEquals($this->userHierarchy->getSubOrdinates(1), $this->getStaticSubOrdinates(3));
+    }
+
+    /**
+     * @author Ravi Sharma <me@rvish.com>
+     *
+     * Method testGetSubOrdinatesByRoles
+     */
+    public function testGetByRoles()
+    {
+        // asserting happy case with role 3
+        $this->assertEquals($this->userHierarchy->getSubOrdinatesByRoles()[3], $this->getStaticSubOrdinates(3));
+
+        // asserting unhappy case with role 3
+        $this->assertNotEquals($this->userHierarchy->getSubOrdinatesByRoles()[3], $this->getStaticSubOrdinates(1));
+
+        // asserting unhappy case with role 5
+        $this->assertEquals($this->userHierarchy->getSubOrdinatesByRoles()[1], $this->getStaticSubOrdinates(1));
+
+        // asserting unhappy case with role 5
+        $this->assertNotEquals($this->userHierarchy->getSubOrdinatesByRoles()[1], $this->getStaticSubOrdinates(3));
     }
 
     /**
