@@ -45,7 +45,7 @@ class UserHierarchyTest extends TestCase
         // asserting unhappy case with role 3
         $this->assertNotEquals($this->userHierarchy->getSubOrdinates(3), $this->getStaticSubOrdinates(1));
 
-        // asserting unhappy case with role 5
+        // asserting happy case with role 5
         $this->assertEquals($this->userHierarchy->getSubOrdinates(1), $this->getStaticSubOrdinates(1));
 
         // asserting unhappy case with role 5
@@ -65,7 +65,7 @@ class UserHierarchyTest extends TestCase
         // asserting unhappy case with role 3
         $this->assertNotEquals($this->userHierarchy->getSubOrdinatesByRoles()[3], $this->getStaticSubOrdinates(1));
 
-        // asserting unhappy case with role 5
+        // asserting happy case with role 5
         $this->assertEquals($this->userHierarchy->getSubOrdinatesByRoles()[1], $this->getStaticSubOrdinates(1));
 
         // asserting unhappy case with role 5

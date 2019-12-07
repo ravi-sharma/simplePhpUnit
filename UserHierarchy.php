@@ -21,6 +21,12 @@ class UserHierarchy
         $this->roles = $this->getJson($roles);
     }
 
+    /**
+     * @author Ravi Sharma <me@rvish.com>
+     *
+     * Method setUsers
+     * @param String $users
+     */
     public function setUsers($users)
     {
         $this->users = $this->getJson($users);
